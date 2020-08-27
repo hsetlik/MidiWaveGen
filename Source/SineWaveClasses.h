@@ -116,29 +116,18 @@ struct MaxiSineVoice   : public juce::SynthesiserVoice
     void startNote (int midiNoteNumber, float velocity,
                     juce::SynthesiserSound*, int /*currentPitchWheelPosition*/) override
     {
-        currentAngle = 0.0;
-        level = velocity * 0.15;
-        tailOff = 0.0;
-
+        level =  velocity / 5.0;
+        env1.trigger = 1;
         auto cyclesPerSecond = juce::MidiMessage::getMidiNoteInHertz (midiNoteNumber);
         frequency = cyclesPerSecond;
-        auto cyclesPerSample = cyclesPerSecond / getSampleRate();
-        
-        angleDelta = cyclesPerSample * 2.0 * juce::MathConstants<double>::pi;
     }
 
-    void stopNote (float /*velocity*/, bool allowTailOff) override
+    void stopNote (float velocity, bool allowTailOff) override
     {
-        if (allowTailOff)
-        {
-            if (tailOff == 0.0)
-                tailOff = 1.0;
-        }
-        else
-        {
+        env1.trigger = 0;
+        allowTailOff = true;
+        if(velocity == 0)
             clearCurrentNote();
-            angleDelta = 0.0;
-        }
     }
 
     void pitchWheelMoved (int) override      {}
@@ -146,12 +135,17 @@ struct MaxiSineVoice   : public juce::SynthesiserVoice
 
     void renderNextBlock (juce::AudioSampleBuffer& outputBuffer, int startSample, int numSamples) override
     {
+        env1.setAttack(25);
+        env1.setDecay(25);
+        env1.setSustain(0.5);
+        env1.setRelease(250);
         for(int sample = 0; sample < numSamples; ++sample)
         {
-            double thisSample = osc1.sinewave(frequency);
+            double rawSample = osc1.sinewave(frequency);
+            double envSample = env1.adsr(rawSample, env1.trigger) * level;
             for(int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
             {
-                outputBuffer.addSample(channel, startSample, thisSample);
+                outputBuffer.addSample(channel, startSample, envSample);
             }
             ++startSample;
         }
@@ -160,5 +154,6 @@ struct MaxiSineVoice   : public juce::SynthesiserVoice
 private:
     double currentAngle = 0.0, angleDelta = 0.0, level = 0.0, tailOff = 0.0;
     maxiOsc osc1;
+    maxiEnv env1;
     double frequency = 0.0;
 };
