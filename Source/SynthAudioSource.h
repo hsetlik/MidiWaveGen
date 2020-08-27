@@ -7,6 +7,7 @@
 #pragma once
 #include <JuceHeader.h>
 #include "SineWaveClasses.h"
+#include "MaxiFMVoice.hpp"
 
 
 class SynthAudioSource   : public juce::AudioSource
@@ -16,9 +17,9 @@ public:
         : keyboardState (keyState)
     {
         for (auto i = 0; i < 4; ++i)
-            synth.addVoice (new MaxiSineVoice());
+            synth.addVoice (new MaxiFMVoice());
 
-        synth.addSound (new SineWaveSound());
+        synth.addSound (new MaxiFMSound());
     }
 
     void setUsingSineWaveSound()
