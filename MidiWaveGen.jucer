@@ -4,17 +4,32 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="M0a7Wg" name="MidiWaveGen">
     <GROUP id="{410922BF-D71A-C91A-8097-1244EE7A6782}" name="Source">
+      <GROUP id="{BA650493-BED1-B42C-D015-156DDE3D5777}" name="Maximilian">
+        <GROUP id="{114AC391-BA6D-2863-BE80-E220EABA6EEC}" name="libs">
+          <FILE id="XxOc39" name="fft.cpp" compile="1" resource="0" file="../../Maximilian/libs/fft.cpp"/>
+          <FILE id="kipWiX" name="fft.h" compile="0" resource="0" file="../../Maximilian/libs/fft.h"/>
+          <FILE id="zPDvvi" name="maxiFFT.cpp" compile="1" resource="0" file="../../Maximilian/libs/maxiFFT.cpp"/>
+          <FILE id="KdWl9x" name="maxiFFT.h" compile="0" resource="0" file="../../Maximilian/libs/maxiFFT.h"/>
+          <FILE id="aVNEiV" name="maxiMFCC.cpp" compile="1" resource="0" file="../../Maximilian/libs/maxiMFCC.cpp"/>
+          <FILE id="Y7H2Uf" name="maxiMFCC.h" compile="0" resource="0" file="../../Maximilian/libs/maxiMFCC.h"/>
+          <FILE id="nmEb0m" name="sineTable.h" compile="0" resource="0" file="../../Maximilian/libs/sineTable.h"/>
+        </GROUP>
+        <FILE id="pqdFe0" name="maximilian.cpp" compile="1" resource="0" file="../../Maximilian/maximilian.cpp"/>
+        <FILE id="bd51TJ" name="maximilian.h" compile="0" resource="0" file="../../Maximilian/maximilian.h"/>
+      </GROUP>
+      <FILE id="TeT1cg" name="SineWaveClasses.h" compile="0" resource="0"
+            file="Source/SineWaveClasses.h"/>
+      <FILE id="s4tFSo" name="SynthAudioSource.h" compile="0" resource="0"
+            file="Source/SynthAudioSource.h"/>
       <FILE id="SiAR1I" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
       <FILE id="Yz5ZSZ" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
-      <FILE id="MhJGeZ" name="MainComponent.cpp" compile="1" resource="0"
-            file="Source/MainComponent.cpp"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" targetName="MidiWaveGen"/>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="MidiWaveGen" headerPath="/Users/hayden/Desktop/Programming/Maximilian"/>
         <CONFIGURATION isDebug="0" name="Release" targetName="MidiWaveGen"/>
       </CONFIGURATIONS>
       <MODULEPATHS>

@@ -6,6 +6,7 @@
 //
 
 #pragma once
+#include "/Users/hayden/Desktop/Programming/Maximilian/maximilian.h"
 
 //==============================================================================
 struct SineWaveSound   : public juce::SynthesiserSound
@@ -101,4 +102,63 @@ struct SineWaveVoice   : public juce::SynthesiserVoice
 
 private:
     double currentAngle = 0.0, angleDelta = 0.0, level = 0.0, tailOff = 0.0;
+};
+
+struct MaxiSineVoice   : public juce::SynthesiserVoice
+{
+    MaxiSineVoice() {}
+
+    bool canPlaySound (juce::SynthesiserSound* sound) override
+    {
+        return dynamic_cast<SineWaveSound*> (sound) != nullptr;
+    }
+
+    void startNote (int midiNoteNumber, float velocity,
+                    juce::SynthesiserSound*, int /*currentPitchWheelPosition*/) override
+    {
+        currentAngle = 0.0;
+        level = velocity * 0.15;
+        tailOff = 0.0;
+
+        auto cyclesPerSecond = juce::MidiMessage::getMidiNoteInHertz (midiNoteNumber);
+        frequency = cyclesPerSecond;
+        auto cyclesPerSample = cyclesPerSecond / getSampleRate();
+        
+        angleDelta = cyclesPerSample * 2.0 * juce::MathConstants<double>::pi;
+    }
+
+    void stopNote (float /*velocity*/, bool allowTailOff) override
+    {
+        if (allowTailOff)
+        {
+            if (tailOff == 0.0)
+                tailOff = 1.0;
+        }
+        else
+        {
+            clearCurrentNote();
+            angleDelta = 0.0;
+        }
+    }
+
+    void pitchWheelMoved (int) override      {}
+    void controllerMoved (int, int) override {}
+
+    void renderNextBlock (juce::AudioSampleBuffer& outputBuffer, int startSample, int numSamples) override
+    {
+        for(int sample = 0; sample < numSamples; ++sample)
+        {
+            double thisSample = osc1.sinewave(frequency);
+            for(int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
+            {
+                outputBuffer.addSample(channel, startSample, thisSample);
+            }
+            ++startSample;
+        }
+    }
+
+private:
+    double currentAngle = 0.0, angleDelta = 0.0, level = 0.0, tailOff = 0.0;
+    maxiOsc osc1;
+    double frequency = 0.0;
 };

@@ -16,7 +16,7 @@ public:
         : keyboardState (keyState)
     {
         for (auto i = 0; i < 4; ++i)
-            synth.addVoice (new SineWaveVoice());
+            synth.addVoice (new MaxiSineVoice());
 
         synth.addSound (new SineWaveSound());
     }
