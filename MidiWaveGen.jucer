@@ -25,6 +25,10 @@
       <FILE id="Yz5ZSZ" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="c7u9lH" name="MaxiFMVoice.cpp" compile="1" resource="0" file="Source/MaxiFMVoice.cpp"/>
       <FILE id="mZHVyS" name="MaxiFMVoice.hpp" compile="0" resource="0" file="Source/MaxiFMVoice.hpp"/>
+      <FILE id="aYhd5U" name="EnvelopeGUIComponent.cpp" compile="1" resource="0"
+            file="Source/EnvelopeGUIComponent.cpp"/>
+      <FILE id="JC1unv" name="EnvelopeGUIComponent.hpp" compile="0" resource="0"
+            file="Source/EnvelopeGUIComponent.hpp"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>

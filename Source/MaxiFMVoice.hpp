@@ -7,6 +7,8 @@
 #pragma once
 #include "/Users/hayden/Desktop/Programming/Maximilian/maximilian.h"
 #include <JuceHeader.h>
+#include "SliderGroup.hpp"
+
 
 struct MaxiFMSound   : public juce::SynthesiserSound
 {
