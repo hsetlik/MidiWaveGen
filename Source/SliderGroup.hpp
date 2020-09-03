@@ -17,11 +17,11 @@ public:
     ~SliderGroup() {}
     void resized() override;
     void sliderValueChanged(juce::Slider* slider) override;
-private:
     juce::Slider aTimeSlider;
     juce::Slider dTimeSlider;
     juce::Slider sLevelSlider;
     juce::Slider rTimeSlider;
+private:
 };
 
 

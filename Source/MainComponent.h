@@ -42,11 +42,12 @@ public:
         
         if (midiInputList.getSelectedId() == 0)
             setMidiInput (0);
-
+        
         addAndMakeVisible (keyboardComponent);
         setAudioChannels (0, 2);
+        addAndMakeVisible(env1);
         
-        setSize (600, 190);
+        setSize (600, 400);
         startTimer (400);
     }
     
@@ -57,8 +58,10 @@ public:
 
     void resized() override
     {
-        midiInputList    .setBounds (200, 10, getWidth() - 210, 20);
-        keyboardComponent.setBounds (10,  40, getWidth() - 20, getHeight() - 50);
+        env1.setBounds(10, 25, getWidth() - 10 , getHeight() -  90);
+        midiInputList.setBounds (200, 5, getWidth() - 210, 20);
+        keyboardComponent.setBounds (10,  getHeight() - 85, getWidth() - 20, 80);
+        env1.toFront(false);
     }
 
     void prepareToPlay (int samplesPerBlockExpected, double sampleRate) override
@@ -104,7 +107,9 @@ private:
     juce::MidiKeyboardState keyboardState;
     SynthAudioSource synthAudioSource;
     juce::MidiKeyboardComponent keyboardComponent;
-
+    
+    
+    SliderGroup env1;
     juce::ComboBox midiInputList;
     juce::Label midiInputListLabel;
     int lastInputIndex = 0;

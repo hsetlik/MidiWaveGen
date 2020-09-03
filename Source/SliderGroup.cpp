@@ -60,11 +60,11 @@ SliderGroup::SliderGroup()
 
 void SliderGroup::resized()
 {
-    int xWidth = getParentWidth() / 4;
-    aTimeSlider.setBounds(0, 0, xWidth, getParentHeight() - 40);
-    dTimeSlider.setBounds(xWidth,0, xWidth, getParentHeight() - 40);
-    sLevelSlider.setBounds(2 * xWidth, 0, xWidth, getParentHeight() - 40);
-    rTimeSlider.setBounds(3 * xWidth, 0, xWidth, getParentHeight() - 40);
+    int xWidth = getWidth() / 4;
+    aTimeSlider.setBounds(0, 0, xWidth, getHeight() - 40);
+    dTimeSlider.setBounds(xWidth,0, xWidth, getHeight() - 40);
+    sLevelSlider.setBounds(2 * xWidth, 0, xWidth, getHeight() - 40);
+    rTimeSlider.setBounds(3 * xWidth, 0, xWidth, getHeight() - 40);
 }
 
 void SliderGroup::sliderValueChanged(juce::Slider* slider)
